@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+
+<style type="text/css">
+.s1{background: blue}
+.s2{background: yellow}
+.s3{background: red}
+.s4{background: black}
+.active{background: red}
+header {
+	position: fixed;
+	top:0px;
+	left: 0px;
+	z-index: 10;
+	background: #fff;
+	padding: 10px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="foolpage.js"></script>
+</head>
+<body>
+
+
+<!-- 
+	use magic class __section__ for sections
+ -->
+<div class="__section__ s1"></div>
+<div class="__section__ s2"></div>
+<div class="__section__ s3"></div>
+<div class="__section__ s4"></div>
+
+<!-- 
+	use magic class __menu__ for menu items and data-menu for declare order
+ -->
+
+<header>
+	menu: 
+	<a class="__menu__" data-menu="0" href="javascript:;">first</a>
+	<a class="__menu__" data-menu="1" href="javascript:;">second</a>
+	<a class="__menu__" data-menu="2" href="javascript:;">third</a>
+	<a class="__menu__" data-menu="3" href="javascript:;">fourth</a>
+</header>
+
+<script type="text/javascript">
+
+
+/*CREATE OBJECT*/
+var page = new foolpage 
+
+/*INIT SETTINGS*/
+page.init({
+	transition : '1s',					
+	timing_function : 'ease-in-out', 	// any timing function available in css
+	active : 'active', 					// classname of active element in menu
+	before : function() {
+		console.log('before scroll')
+	},
+	after : function() {
+		console.log('after scroll')
+	},
+	before_up : function() {
+		console.log('before up scroll')
+	},
+	before_down : function() {
+		console.log('before down scroll')
+	},
+	after_up : function() {
+		console.log('after up scoll')
+	},
+	after_down : function() {
+		console.log('after down scroll')
+	},
+	before_menu_change : function() {
+		console.log('before menu change state')
+	}, 
+	after_menu_change : function() {
+		console.log('after menu change state')
+	},
+	before_refresh : function() {
+		console.log('before refresh')
+	},
+	after_refresh : function() {
+		console.log('after refresh')
+	}
+})
+
+/**
+	after appending, removing, or change ordering you need to call page.refresh() only
+ */
+
+$(document).on('keyup' , 'body' , function(e) {
+	if(e.which == 13) {
+
+		$.post('ajax.html' ,{
+			lol : 'huehue'
+		}).done(function(data) {
+			$('<a>')
+				.prop('href','javascript:;')
+				.data('menu',$('.__menu__').length)
+				.prop('class','__menu__')
+				.css({'margin-right':'5px'})
+				.html("inserted")
+				.appendTo('header')
+
+			$('<div>')
+				.prop('class' , '__section__')
+				.css({
+					backgroundColor : 'rgb('+(Math.floor(Math.random()*255))+','+(Math.floor(Math.random()*255))+','+(Math.floor(Math.random()*255))+')'
+				})
+				.html(data)
+				.appendTo('body')
+
+			/*
+					....
+				then refresh plugin using:
+			*/
+			page.refresh()
+		})
+
+	}
+})
+
+</script>
+
+</body>
+</html>
