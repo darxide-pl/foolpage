@@ -8,7 +8,7 @@ function foolpage() {
 	this.len = $('.__section__').length
 
 	this.init = function(settings) {
-		self.parse_setting(settings)
+		self.parse_setting(settings || false)
 		self.menu_state_change(true)
 		self.init_css()
 		self.init_position()
