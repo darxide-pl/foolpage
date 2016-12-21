@@ -111,9 +111,10 @@ page.init({
  */
 
 $(document).on('click' , '.load' , function(e) {
-	$.post('ajax.html' ,{
-		lol : 'huehue'
-	}).done(function(data) {
+	/*lets fake ajax request*/
+
+	setTimeout(function() {
+		/*when ajax request is done - do your logic for handle with data ... */
 		$('<a>')
 			.prop('href','javascript:;')
 			.data('menu',$('.__menu__').length)
@@ -135,7 +136,7 @@ $(document).on('click' , '.load' , function(e) {
 			then refresh plugin using:
 		*/
 		page.refresh()
-	})
+	} ,100)
 })
 
 </script>
