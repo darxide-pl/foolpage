@@ -34,6 +34,9 @@ page.init();
 </script>
 ```
 
+Demo page:<br>
+https://darxide-pl.github.io/foolpage/
+
 ADDITIONAL SETTINGS: 
 ```javascript
 <script>
